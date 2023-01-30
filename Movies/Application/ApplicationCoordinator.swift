@@ -13,14 +13,21 @@ final class ApplicationCoordinator: BaseCoordinator {
 	
 	private let windowsFactory: WindowsFactory
 	
-	internal init(windowsFactory: WindowsFactory, router: Router, coordinatorsFactory: CoordinatorFactory) {
-		super.init(router: router, coordinatorsFactory: coordinatorsFactory)
+	init(windowsFactory: WindowsFactory, router: Router, coordinatorsFactory: CoordinatorsFactory) {
 		self.windowsFactory = windowsFactory
+		super.init(router: router, coordinatorsFactory: coordinatorsFactory)
 	}
 	
 	override func start() {
 		window.makeKeyAndVisible()
+		runMovieListFlow()
 	}
-	
-	//TODO: из фабрики модулей переделать в фабрику которая создает фабрики экранов(контроллеров), чтобы в координаторе доставать фабрику экрана(контроллера) и оттуда вызыывать нужнй нам контроллер( сделано для того, чтобы легко было изменить контроллер, который должен быть показан)
+}
+
+private extension ApplicationCoordinator {
+	func runMovieListFlow() {
+		let coordinator = coordinatorsFactory.makeMoviesListCoordinator()
+		addDependency(coordinator)
+		coordinator.start()
+	}
 }

@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class ModulesFactoryImp: ModulesFactory{
-	func makeMoviesListModule() -> MoviesListViewController {
+final class ScreensFactoryImp: ScreensFactory{
+	func makeMoviesListScreen() -> MoviesListViewController {
 		return MoviesListViewController()
 	}
 	

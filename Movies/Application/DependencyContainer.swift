@@ -13,19 +13,14 @@ final class DependencyContainer{
 	
 	var rootViewController = UINavigationController()
 	
-	private lazy var router: Router = RouterImp(rootViewController: rootViewController)
-	private lazy var windowsFactory: WindowsFactory = WindowsFactoryImp(scene: sceneArray)
-	private lazy var coordinatorsFactory: CoordinatorsFactory = 
+	private lazy var router = RouterImp(rootViewController: rootViewController)
+	private lazy var windowsFactory = WindowsFactoryImp(rootViewController: rootViewController,scene: sceneArray)
+	private lazy var screensFactory = ScreensFactoryImp()
+	private lazy var coordinatorsFactory = CoordinatorsFactoryImp(router: router,modulesFactory: screensFactory)
 	
-	var applicationCoordinator = 
+	public lazy var applicationCoordinator = coordinatorsFactory.makeApplicationCoordinator(windowsFactory: windowsFactory)
 	
 	init(sceneArray: [UIWindowScene]) {
 		self.sceneArray = sceneArray
-	}
-	
-	func startRootCoordinator(for window: UIWindow?){
-		let coordinator = ApplicationCoordinator()
-		coordinator.window = window
-		coordinator.start()
 	}
 }

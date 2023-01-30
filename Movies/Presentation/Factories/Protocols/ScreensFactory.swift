@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ModulesFactory{
-	func makeMoviesListModule() -> MoviesListViewController
+protocol ScreensFactory{
+	func makeMoviesListScreen() -> MoviesListViewController
 }

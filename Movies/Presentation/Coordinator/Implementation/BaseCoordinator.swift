@@ -10,11 +10,11 @@ import Foundation
 class BaseCoordinator: Coordinator{
 
 	let router: Router
-	let coordinatorsFactory: CoordinatorFactory
+	let coordinatorsFactory: CoordinatorsFactory
 	
 	var childCoordinators: [Coordinator]
 	
-	internal init(router: Router, coordinatorsFactory: CoordinatorFactory) {
+	internal init(router: Router, coordinatorsFactory: CoordinatorsFactory) {
 		self.router = router
 		self.coordinatorsFactory = coordinatorsFactory
 		self.childCoordinators = []

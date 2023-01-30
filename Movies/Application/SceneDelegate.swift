@@ -7,7 +7,6 @@
 
 import UIKit
 
-@main
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	
 	private var dependencyContainer: DependencyContainer?
@@ -17,6 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let scene = (scene as? UIWindowScene) else { return }
 		
 		dependencyContainer = DependencyContainer(sceneArray: [scene])
+		dependencyContainer?.applicationCoordinator.start()
 	}
 
 }
