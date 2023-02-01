@@ -12,16 +12,16 @@ final class MoviesListViewController: UIViewController {
 	
 	private var viewModel: MoviesListViewModel!
 	
-	private let movieListCollectionView = MovieListCollectionView()
-	
+	private let moviesListCollectionView = MoviesListCollectionView()
+
 	func setViewModel(_ viewModel: MoviesListViewModel) {
 		self.viewModel = viewModel
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		moviesListCollectionView.viewModel = viewModel
 		setupViews()
-		movieListCollectionView.viewModel = viewModel
 		viewModel.viewDidLoad()
 		bind(to: viewModel)
 	}
@@ -33,13 +33,12 @@ final class MoviesListViewController: UIViewController {
 	}
 	
 	private func updateItems() {
-		movieListCollectionView.reload()
+		moviesListCollectionView.reload()
 	}
 	
 	private func setupViews() {
-		view.backgroundColor = .yellow
-		view.addSubview(movieListCollectionView)
-		movieListCollectionView.snp.makeConstraints { make in
+		view.addSubview(moviesListCollectionView)
+		moviesListCollectionView.snp.makeConstraints { make in
 			make.top.bottom.left.right.equalToSuperview()
 		}
 	}

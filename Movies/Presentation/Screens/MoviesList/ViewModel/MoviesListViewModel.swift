@@ -22,6 +22,9 @@ protocol MoviesListViewModelOutput {
 
 final class MoviesListViewModel: MoviesListViewModelOutput {
 	
+	//TODO: добавить наблюдаемое свойство с настройками ячейки( как в myComics) , у collectionView пописать под изменения этого свойства во вью модел, если изменилось, надо пересчитать размеры ячейки и остальное все, и перезагрузить коллекцию
+	//TODO: У контроллера сделать кнопку, при нажатии она вызывает метод у вьюмодел для смены вида ячейки, а та после смены, вызывает действия наблюдателей
+	//TODO: все действия(смена вида кнопки, смена вида ячейки, еще любые пересчеты) кроме самого изменения, должны исполняться через наблюдение, а не в методе нажатия кнопки
 	private let getMoviesUseCase: GetMoviesUseCase
 	private let actions: MoviesListViewModelActions?
 	
@@ -36,7 +39,7 @@ final class MoviesListViewModel: MoviesListViewModelOutput {
 extension MoviesListViewModel: MoviesListViewModelInput {
 	
 	func viewDidLoad() {
-		getMoviesUseCase.execute(countMovies: 5) { result in
+		getMoviesUseCase.execute(countMovies: 50) { result in
 			switch result {
 			case .success(let movies):
 				self.items.value = movies
