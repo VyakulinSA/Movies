@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MovieListCoordinator: BaseCoordinator {
+final class MoviesListCoordinator: BaseCoordinator {
 	private let screensFactory: ScreensFactory
 	
 	init(screensFactory: ScreensFactory, router: Router, coordinatorsFactory: CoordinatorsFactory) {
@@ -16,14 +16,15 @@ final class MovieListCoordinator: BaseCoordinator {
 	}
 	
 	override func start() {
-		let screen = screensFactory.makeMoviesListScreen()
+		let actions = MoviesListViewModelActions(showMovieDetails: showMovieDetails)
+		let screen = screensFactory.makeMoviesListScreen(actions: actions)
 		router.push(screen, animated: true)
 	}
 	
 }
 
-private extension MovieListCoordinator {
-	func showMovieDetail(){
-		
+private extension MoviesListCoordinator {
+	func showMovieDetails(movie: Movie){
+		print("Show moview details action, index: \(movie.title ?? "nil")")
 	}
 }

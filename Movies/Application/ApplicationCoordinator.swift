@@ -5,8 +5,6 @@
 //  Created by Вякулин Сергей on 27.01.2023.
 //
 
-import UIKit
-
 final class ApplicationCoordinator: BaseCoordinator {
 
 	lazy private var window = windowsFactory.makeWindow(with: .firstScene)

@@ -1,5 +1,5 @@
 //
-//  UIViewController+Presentable.swift
+//  UIViewController+Extensions.swift
 //  Movies
 //
 //  Created by Вякулин Сергей on 30.01.2023.

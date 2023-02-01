@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ScreensFactory{
-	func makeMoviesListScreen() -> MoviesListViewController
+	func makeMoviesListScreen(actions: MoviesListViewModelActions) -> MoviesListViewController
 }

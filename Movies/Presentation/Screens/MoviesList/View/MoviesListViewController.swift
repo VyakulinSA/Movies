@@ -6,31 +6,46 @@
 //
 
 import UIKit
+import SnapKit
 
-class MoviesListViewController: UIViewController {
+final class MoviesListViewController: UIViewController {
 	
-	private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+	private var viewModel: MoviesListViewModel!
 	
+	private let movieListCollectionView = MovieListCollectionView()
 	
-	
+	func setViewModel(_ viewModel: MoviesListViewModel) {
+		self.viewModel = viewModel
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = .red
-		
-		collectionView.backgroundColor = .blue
-		view.addSubview(collectionView)
-		
-		collectionView.translatesAutoresizingMaskIntoConstraints = false
-		
-		NSLayoutConstraint.activate([
-			collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-			collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-			collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-			collectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
-		])
+		setupViews()
+		movieListCollectionView.viewModel = viewModel
+		viewModel.viewDidLoad()
+		bind(to: viewModel)
+	}
+	
+	private func bind(to viewModel: MoviesListViewModel){
+		viewModel.items.observe(on: self) { [weak self] _ in
+			self?.updateItems()
+		}
+	}
+	
+	private func updateItems() {
+		movieListCollectionView.reload()
+	}
+	
+	private func setupViews() {
+		view.backgroundColor = .yellow
+		view.addSubview(movieListCollectionView)
+		movieListCollectionView.snp.makeConstraints { make in
+			make.top.bottom.left.right.equalToSuperview()
+		}
 	}
 
 
 }
+
+
 

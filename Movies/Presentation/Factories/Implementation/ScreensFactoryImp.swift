@@ -8,8 +8,24 @@
 import Foundation
 
 final class ScreensFactoryImp: ScreensFactory{
-	func makeMoviesListScreen() -> MoviesListViewController {
-		return MoviesListViewController()
+	private let useCasesFactory: UseCasesFactory
+	
+	init(useCasesFactory: UseCasesFactory) {
+		self.useCasesFactory = useCasesFactory
+	}
+	
+	func makeMoviesListScreen(actions: MoviesListViewModelActions) -> MoviesListViewController {
+		let controller = MoviesListViewController()
+		let viewModel = makeMoviesListViewModel(actions: actions)
+		controller.setViewModel(viewModel)
+		return controller
+	}
+	
+	private func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
+		return MoviesListViewModel(
+			getMoviesUseCase: useCasesFactory.makeGetMoviesUseCase(),
+			actions: actions
+		)
 	}
 	
 }

@@ -21,7 +21,7 @@ final class CoordinatorsFactoryImp: CoordinatorsFactory {
 	}
 	
 	func makeMoviesListCoordinator() -> Coordinator {
-		return MovieListCoordinator(screensFactory: screensFactory, router: router, coordinatorsFactory: self)
+		return MoviesListCoordinator(screensFactory: screensFactory, router: router, coordinatorsFactory: self)
 	}
 	
 	

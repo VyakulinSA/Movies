@@ -6,14 +6,13 @@
 //
 
 import Foundation
-import UIKit
 
 final class RouterImp: Router{
 	
 	//TODO: Закрыть протоколом NavigationController чтобы убрать жесткое связывание
-	private weak var rootViewController: UINavigationController?
+	private weak var rootViewController: NavigationController?
 	
-	init(rootViewController: UINavigationController?) {
+	init(rootViewController: NavigationController?) {
 		self.rootViewController = rootViewController
 	}
 	
